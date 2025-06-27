@@ -20,13 +20,13 @@ const WeatherMap = () => {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    
+
     // Convert pixel coordinates to approximate lat/lng
     const lng = ((x / rect.width) * 360) - 180;
     const lat = 90 - ((y / rect.height) * 180);
-    
+
     setSelectedLocation({ lat, lng, x, y });
-    
+
     // Simulate API call with mock data
     setLoading(true);
     setTimeout(() => {
@@ -57,15 +57,15 @@ const WeatherMap = () => {
       <div className="container mx-auto px-6 py-12 relative z-10">
         {/* Header */}
         <div className={`mb-8 ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
-          <Button 
+          <Button
             onClick={() => navigate('/')}
-            variant="ghost" 
+            variant="ghost"
             className="mb-4 hover:bg-green-100 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
-          
+
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-4">
               Interactive Weather Map
@@ -97,14 +97,14 @@ const WeatherMap = () => {
                   >
                     {/* Simple world map outlines */}
                     <rect width="1000" height="500" fill="#e0f2fe" />
-                    
+
                     {/* Continents - simplified shapes */}
                     <path d="M100 200 L300 180 L350 220 L280 280 L150 300 Z" fill="#22c55e" opacity="0.7" />
                     <path d="M350 150 L600 140 L650 200 L580 250 L400 260 Z" fill="#16a34a" opacity="0.7" />
                     <path d="M650 180 L800 170 L850 220 L780 270 L700 250 Z" fill="#15803d" opacity="0.7" />
                     <path d="M200 320 L400 310 L450 380 L350 420 L250 400 Z" fill="#166534" opacity="0.7" />
                     <path d="M750 300 L900 290 L950 350 L850 390 L800 360 Z" fill="#14532d" opacity="0.7" />
-                    
+
                     {/* Click indicator */}
                     {selectedLocation && (
                       <circle
@@ -152,7 +152,7 @@ const WeatherMap = () => {
                       <p className="text-sm text-gray-600 mb-2">Location</p>
                       <p className="font-semibold text-gray-800">{weatherData.location}</p>
                     </div>
-                    
+
                     <div className="grid gap-4">
                       <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
                         <div className="flex items-center">
@@ -161,7 +161,7 @@ const WeatherMap = () => {
                         </div>
                         <span className="font-semibold text-red-600">{weatherData.temperature}°C</span>
                       </div>
-                      
+
                       <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                         <div className="flex items-center">
                           <Droplets className="h-4 w-4 text-blue-500 mr-2" />
@@ -169,7 +169,7 @@ const WeatherMap = () => {
                         </div>
                         <span className="font-semibold text-blue-600">{weatherData.humidity}%</span>
                       </div>
-                      
+
                       <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
                         <div className="flex items-center">
                           <Gauge className="h-4 w-4 text-purple-500 mr-2" />
@@ -177,7 +177,7 @@ const WeatherMap = () => {
                         </div>
                         <span className="font-semibold text-purple-600">{weatherData.pressure} mb</span>
                       </div>
-                      
+
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center">
                           <Cloud className="h-4 w-4 text-gray-500 mr-2" />
@@ -186,7 +186,7 @@ const WeatherMap = () => {
                         <span className="font-semibold text-gray-600">{weatherData.cloudCover}%</span>
                       </div>
                     </div>
-                    
+
                     <div className="text-center mt-6 p-3 bg-green-50 rounded-lg">
                       <p className="text-sm text-gray-600 mb-1">Conditions</p>
                       <p className="font-semibold text-green-600">{weatherData.description}</p>

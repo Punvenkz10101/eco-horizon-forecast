@@ -1,36 +1,31 @@
-
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import { ArrowLeft, Cloud, CloudRain, Thermometer, Droplets, Gauge, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useNavigate } from 'react-router-dom';
 
-const Forecast = () => {
+type ForecastDay = {
+  Date: string;
+  "Temperature (C)": number;
+  Humidity: number;
+  "Pressure (millibars)": number;
+  "Cloud Cover": number;
+  "Rain Chance (%)": number;
+  "Daily Summary": string;
+};
+
+const Forecast: React.FC = () => {
   const navigate = useNavigate();
+  const [forecast, setForecast] = useState<ForecastDay[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    fetch("/bangalore_forecast.json")
+      .then((res) => res.json())
+      .then(setForecast);
   }, []);
-
-  const weatherData = [
-    { date: '2025-06-23', temperature: 27.41, humidity: 0.52, pressure: 985.68, cloudCover: 0.42, rainChance: 72.67, summary: 'Rain Likely' },
-    { date: '2025-06-24', temperature: 27.26, humidity: 0.53, pressure: 975.20, cloudCover: 0.42, rainChance: 72.47, summary: 'Rain Likely' },
-    { date: '2025-06-25', temperature: 27.27, humidity: 0.53, pressure: 986.75, cloudCover: 0.41, rainChance: 72.25, summary: 'Rain Likely' },
-    { date: '2025-06-26', temperature: 27.15, humidity: 0.52, pressure: 984.80, cloudCover: 0.41, rainChance: 72.43, summary: 'Rain Likely' },
-    { date: '2025-06-27', temperature: 27.00, humidity: 0.53, pressure: 988.52, cloudCover: 0.42, rainChance: 72.91, summary: 'Rain Likely' },
-    { date: '2025-06-28', temperature: 27.34, humidity: 0.53, pressure: 993.58, cloudCover: 0.41, rainChance: 72.71, summary: 'Rain Likely' },
-    { date: '2025-06-29', temperature: 27.09, humidity: 0.53, pressure: 986.60, cloudCover: 0.41, rainChance: 72.59, summary: 'Rain Likely' },
-    { date: '2025-06-30', temperature: 26.98, humidity: 0.54, pressure: 983.52, cloudCover: 0.40, rainChance: 71.26, summary: 'Rain Likely' },
-    { date: '2025-07-01', temperature: 27.03, humidity: 0.53, pressure: 980.33, cloudCover: 0.40, rainChance: 72.84, summary: 'Rain Likely' },
-    { date: '2025-07-02', temperature: 26.77, humidity: 0.52, pressure: 984.24, cloudCover: 0.40, rainChance: 73.57, summary: 'Rain Likely' },
-    { date: '2025-07-03', temperature: 26.61, humidity: 0.53, pressure: 989.06, cloudCover: 0.40, rainChance: 72.65, summary: 'Rain Likely' },
-    { date: '2025-07-04', temperature: 26.93, humidity: 0.53, pressure: 992.27, cloudCover: 0.40, rainChance: 72.81, summary: 'Rain Likely' },
-    { date: '2025-07-05', temperature: 27.01, humidity: 0.54, pressure: 983.03, cloudCover: 0.39, rainChance: 73.27, summary: 'Rain Likely' },
-    { date: '2025-07-06', temperature: 26.79, humidity: 0.53, pressure: 987.04, cloudCover: 0.40, rainChance: 72.83, summary: 'Rain Likely' },
-    { date: '2025-07-07', temperature: 26.89, humidity: 0.54, pressure: 986.39, cloudCover: 0.39, rainChance: 72.70, summary: 'Rain Likely' }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50 relative overflow-hidden">
@@ -50,15 +45,15 @@ const Forecast = () => {
       <div className="container mx-auto px-6 py-12 relative z-10">
         {/* Header */}
         <div className={`mb-8 ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
-          <Button 
+          <Button
             onClick={() => navigate('/')}
-            variant="ghost" 
+            variant="ghost"
             className="mb-4 hover:bg-green-100 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
-          
+
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-4">
               15-Day Weather Forecast
@@ -80,7 +75,7 @@ const Forecast = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-red-600">
-                {(weatherData.reduce((sum, day) => sum + day.temperature, 0) / weatherData.length).toFixed(1)}°C
+                {(forecast.reduce((sum, day) => sum + day["Temperature (C)"], 0) / forecast.length).toFixed(1)}°C
               </div>
             </CardContent>
           </Card>
@@ -94,7 +89,7 @@ const Forecast = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-blue-600">
-                {(weatherData.reduce((sum, day) => sum + day.rainChance, 0) / weatherData.length).toFixed(1)}%
+                {(forecast.reduce((sum, day) => sum + day["Rain Chance (%)"], 0) / forecast.length).toFixed(1)}%
               </div>
             </CardContent>
           </Card>
@@ -108,7 +103,7 @@ const Forecast = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-cyan-600">
-                {(weatherData.reduce((sum, day) => sum + day.humidity, 0) / weatherData.length * 100).toFixed(1)}%
+                {(forecast.reduce((sum, day) => sum + day.Humidity, 0) / forecast.length * 100).toFixed(1)}%
               </div>
             </CardContent>
           </Card>
@@ -122,7 +117,7 @@ const Forecast = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-purple-600">
-                {(weatherData.reduce((sum, day) => sum + day.pressure, 0) / weatherData.length).toFixed(0)} mb
+                {(forecast.reduce((sum, day) => sum + day["Pressure (millibars)"], 0) / forecast.length).toFixed(0)} mb
               </div>
             </CardContent>
           </Card>
@@ -148,24 +143,24 @@ const Forecast = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {weatherData.map((day, index) => (
-                    <TableRow key={index} className="hover:bg-green-50/50 transition-colors">
+                  {forecast.map((day) => (
+                    <TableRow key={day.Date} className="hover:bg-green-50/50 transition-colors">
                       <TableCell className="font-medium">
-                        {new Date(day.date).toLocaleDateString('en-US', { 
-                          weekday: 'short', 
-                          month: 'short', 
-                          day: 'numeric' 
+                        {new Date(day.Date).toLocaleDateString('en-US', {
+                          weekday: 'short',
+                          month: 'short',
+                          day: 'numeric'
                         })}
                       </TableCell>
-                      <TableCell className="text-red-600 font-semibold">{day.temperature.toFixed(1)}</TableCell>
-                      <TableCell className="text-cyan-600">{(day.humidity * 100).toFixed(1)}</TableCell>
-                      <TableCell className="text-purple-600">{day.pressure.toFixed(1)}</TableCell>
-                      <TableCell className="text-gray-600">{(day.cloudCover * 100).toFixed(1)}</TableCell>
-                      <TableCell className="text-blue-600 font-semibold">{day.rainChance.toFixed(1)}</TableCell>
+                      <TableCell className="text-red-600 font-semibold">{day["Temperature (C)"].toFixed(1)}</TableCell>
+                      <TableCell className="text-cyan-600">{(day.Humidity * 100).toFixed(1)}</TableCell>
+                      <TableCell className="text-purple-600">{day["Pressure (millibars)"].toFixed(1)}</TableCell>
+                      <TableCell className="text-gray-600">{(day["Cloud Cover"] * 100).toFixed(1)}</TableCell>
+                      <TableCell className="text-blue-600 font-semibold">{day["Rain Chance (%)"]}</TableCell>
                       <TableCell>
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                           <CloudRain className="h-3 w-3 mr-1" />
-                          {day.summary}
+                          {day["Daily Summary"]}
                         </span>
                       </TableCell>
                     </TableRow>
