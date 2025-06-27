@@ -35,7 +35,7 @@ const Index = () => {
       description: "Interactive map of India with real-time weather data",
       gradient: "from-purple-400 to-pink-500",
       delay: "0.4s",
-      action: () => console.log("Navigate to weather map")
+      action: () => navigate('/weather-map')
     }
   ];
 

@@ -4,8 +4,6 @@ import { ArrowLeft, Cloud, CloudRain, Thermometer, Droplets, Gauge, Eye } from '
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
 const Forecast = () => {
@@ -33,17 +31,6 @@ const Forecast = () => {
     { date: '2025-07-06', temperature: 26.79, humidity: 0.53, pressure: 987.04, cloudCover: 0.40, rainChance: 72.83, summary: 'Rain Likely' },
     { date: '2025-07-07', temperature: 26.89, humidity: 0.54, pressure: 986.39, cloudCover: 0.39, rainChance: 72.70, summary: 'Rain Likely' }
   ];
-
-  const chartConfig = {
-    temperature: {
-      label: "Temperature (°C)",
-      color: "#ef4444",
-    },
-    rainChance: {
-      label: "Rain Chance (%)",
-      color: "#3b82f6",
-    },
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50 relative overflow-hidden">
@@ -141,75 +128,8 @@ const Forecast = () => {
           </Card>
         </div>
 
-        {/* Charts */}
-        <div className={`grid md:grid-cols-2 gap-6 mb-8 ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-          <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-800">Temperature Trend</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-64">
-                <LineChart data={weatherData}>
-                  <XAxis 
-                    dataKey="date" 
-                    tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                  />
-                  <YAxis />
-                  <ChartTooltip 
-                    content={<ChartTooltipContent />}
-                    labelFormatter={(value) => new Date(value).toLocaleDateString('en-US', { 
-                      weekday: 'short', 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="temperature" 
-                    stroke="var(--color-temperature)" 
-                    strokeWidth={2}
-                    dot={{ fill: "var(--color-temperature)" }}
-                  />
-                </LineChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-800">Rain Probability</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-64">
-                <LineChart data={weatherData}>
-                  <XAxis 
-                    dataKey="date" 
-                    tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                  />
-                  <YAxis />
-                  <ChartTooltip 
-                    content={<ChartTooltipContent />}
-                    labelFormatter={(value) => new Date(value).toLocaleDateString('en-US', { 
-                      weekday: 'short', 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="rainChance" 
-                    stroke="var(--color-rainChance)" 
-                    strokeWidth={2}
-                    dot={{ fill: "var(--color-rainChance)" }}
-                  />
-                </LineChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Data Table */}
-        <Card className={`border-0 shadow-lg bg-white/70 backdrop-blur-sm ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+        <Card className={`border-0 shadow-lg bg-white/70 backdrop-blur-sm ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-gray-800">Detailed Forecast Data</CardTitle>
           </CardHeader>
