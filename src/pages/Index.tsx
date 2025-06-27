@@ -1,11 +1,12 @@
-
 import { useState, useEffect } from 'react';
 import { Cloud, Thermometer, MapPin, Leaf, Sun, CloudRain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMounted(true);
@@ -17,21 +18,24 @@ const Index = () => {
       title: "Display Sensor Dashboard",
       description: "Real-time IoT sensor data from Raspberry Pi Pico W",
       gradient: "from-green-400 to-blue-500",
-      delay: "0s"
+      delay: "0s",
+      action: () => console.log("Navigate to sensor dashboard")
     },
     {
       icon: CloudRain,
       title: "Predict 15-Day Forecast",
       description: "ML-powered weather predictions with custom ensemble model",
       gradient: "from-blue-400 to-purple-500",
-      delay: "0.2s"
+      delay: "0.2s",
+      action: () => navigate('/forecast')
     },
     {
       icon: MapPin,
       title: "Weather API Map",
       description: "Interactive map of India with real-time weather data",
       gradient: "from-purple-400 to-pink-500",
-      delay: "0.4s"
+      delay: "0.4s",
+      action: () => console.log("Navigate to weather map")
     }
   ];
 
@@ -108,6 +112,7 @@ const Index = () => {
                 </p>
                 
                 <Button 
+                  onClick={feature.action}
                   className={`bg-gradient-to-r ${feature.gradient} hover:shadow-lg transition-all duration-300 text-white border-0 group-hover:scale-105`}
                 >
                   Explore
