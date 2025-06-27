@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Thermometer, Droplets, Gauge, Cloud } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
+import IndiaMap from '../components/IndiaMap';
 
 const WeatherMap = () => {
   const navigate = useNavigate();
@@ -76,51 +76,22 @@ const WeatherMap = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* Map Section */}
-          <div className={`lg:col-span-2 ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
-            <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm">
+          <div className={`${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+            <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm h-full">
               <CardHeader>
                 <CardTitle className="text-lg font-semibold text-gray-800 flex items-center">
                   <MapPin className="h-5 w-5 mr-2 text-green-600" />
-                  World Map
+                  India Map
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="relative bg-gradient-to-br from-blue-100 to-green-100 rounded-lg p-4 h-96 overflow-hidden">
-                  <svg
-                    width="100%"
-                    height="100%"
-                    viewBox="0 0 1000 500"
-                    className="cursor-pointer"
-                    onClick={handleMapClick}
-                  >
-                    {/* Simple world map outlines */}
-                    <rect width="1000" height="500" fill="#e0f2fe" />
-
-                    {/* Continents - simplified shapes */}
-                    <path d="M100 200 L300 180 L350 220 L280 280 L150 300 Z" fill="#22c55e" opacity="0.7" />
-                    <path d="M350 150 L600 140 L650 200 L580 250 L400 260 Z" fill="#16a34a" opacity="0.7" />
-                    <path d="M650 180 L800 170 L850 220 L780 270 L700 250 Z" fill="#15803d" opacity="0.7" />
-                    <path d="M200 320 L400 310 L450 380 L350 420 L250 400 Z" fill="#166534" opacity="0.7" />
-                    <path d="M750 300 L900 290 L950 350 L850 390 L800 360 Z" fill="#14532d" opacity="0.7" />
-
-                    {/* Click indicator */}
-                    {selectedLocation && (
-                      <circle
-                        cx={selectedLocation.x}
-                        cy={selectedLocation.y}
-                        r="8"
-                        fill="#ef4444"
-                        stroke="#ffffff"
-                        strokeWidth="2"
-                        className="animate-pulse"
-                      />
-                    )}
-                  </svg>
+                <div className="relative bg-gradient-to-br from-blue-100 to-green-100 rounded-lg p-4 h-96 overflow-hidden flex items-center justify-center">
+                  <IndiaMap />
                 </div>
                 <p className="text-sm text-gray-600 mt-2 text-center">
-                  Click anywhere on the map to get weather information for that location
+                  Click on a state to get weather information
                 </p>
               </CardContent>
             </Card>
@@ -128,7 +99,7 @@ const WeatherMap = () => {
 
           {/* Weather Data Section */}
           <div className={`${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-            <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm h-full">
               <CardHeader>
                 <CardTitle className="text-lg font-semibold text-gray-800 flex items-center">
                   <Thermometer className="h-5 w-5 mr-2 text-red-600" />

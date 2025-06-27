@@ -20,7 +20,7 @@ const Index = () => {
       gradient: "from-green-400 to-blue-500",
       delay: "0s",
       action: () => {
-        window.location.href = "http://192.168.165.71";
+        window.location.assign("http://192.168.165.71");
       }
     },
     {
@@ -30,14 +30,6 @@ const Index = () => {
       gradient: "from-blue-400 to-purple-500",
       delay: "0.2s",
       action: () => navigate('/forecast')
-    },
-    {
-      icon: MapPin,
-      title: "Weather API Map",
-      description: "Interactive map of India with real-time weather data",
-      gradient: "from-purple-400 to-pink-500",
-      delay: "0.4s",
-      action: () => navigate('/weather-map')
     }
   ];
 
@@ -93,12 +85,13 @@ const Index = () => {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16 justify-center place-items-center">
           {features.map((feature, index) => (
             <Card
               key={feature.title}
+              onClick={feature.action}
               className={`group cursor-pointer transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-lg hover:shadow-2xl border-0 ${mounted ? 'animate-fade-in' : 'opacity-0'}`}
-              style={{ animationDelay: feature.delay }}
+              style={{ animationDelay: feature.delay, maxWidth: 400 }}
             >
               <CardContent className="p-8 text-center h-full flex flex-col">
                 <div className={`bg-gradient-to-r ${feature.gradient} p-4 rounded-full mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
@@ -112,13 +105,6 @@ const Index = () => {
                 <p className="text-gray-600 mb-6 flex-grow">
                   {feature.description}
                 </p>
-
-                <Button
-                  onClick={feature.action}
-                  className={`bg-gradient-to-r ${feature.gradient} hover:shadow-lg transition-all duration-300 text-white border-0 group-hover:scale-105`}
-                >
-                  Explore
-                </Button>
               </CardContent>
             </Card>
           ))}
