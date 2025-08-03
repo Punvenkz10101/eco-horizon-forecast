@@ -162,17 +162,6 @@ eco-horizon-forecast/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Weather data sourced from historical Bangalore weather records
-- UI components built with shadcn/ui
-- Map visualization powered by React Simple Maps
-- Charts and graphs created with Recharts
-
----
 
 **Built with ❤️ using React, TypeScript, and Python**
