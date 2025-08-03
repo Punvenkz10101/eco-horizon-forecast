@@ -1,73 +1,178 @@
-# Welcome to your Lovable project
+# 🌤️ Eco Horizon Forecast
 
-## Project info
+A comprehensive weather forecasting application that combines machine learning with interactive data visualization to provide accurate weather predictions for Bangalore, India.
 
-**URL**: https://lovable.dev/projects/a7042810-fccc-49fe-8482-c3837269f9bd
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/Numpy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 
-## How can I edit this code?
+## 📺 Demo Video
 
-There are several ways of editing your application.
+Watch our project demo: [Eco Horizon Forecast Demo](https://drive.google.com/file/d/1KbNriFuMCglnB8D0MeVVkk932JnNVJBy/view?usp=drive_link)
 
-**Use Lovable**
+## 🚀 Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a7042810-fccc-49fe-8482-c3837269f9bd) and start prompting.
+- **Interactive Weather Map**: Visualize weather patterns across India with an interactive map
+- **Machine Learning Forecasts**: Advanced ML models for accurate weather predictions
+- **Real-time Data Visualization**: Beautiful charts and graphs using Recharts
+- **Responsive Design**: Modern UI built with shadcn/ui and Tailwind CSS
+- **Bangalore Weather Dataset**: Comprehensive historical weather data for training
+- **Multi-page Application**: Forecast, Weather Map, and Dashboard views
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Technologies Used
 
-**Use your preferred IDE**
+### Frontend
+- **React 18** - Modern React with hooks and functional components
+- **TypeScript** - Type-safe JavaScript development
+- **Vite** - Fast build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Beautiful and accessible UI components
+- **React Router** - Client-side routing
+- **Recharts** - Composable charting library
+- **React Simple Maps** - Interactive map visualization
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Backend & Data Processing
+- **Python** - Machine learning and data processing
+- **Pandas** - Data manipulation and analysis
+- **NumPy** - Numerical computing
+- **Custom ML Models** - Ensemble regressors and classifiers
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Development Tools
+- **ESLint** - Code linting and formatting
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixing
 
-Follow these steps:
+## 📊 Machine Learning & Data
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Bangalore Weather Dataset
+The project utilizes a comprehensive weather dataset for Bangalore, India, containing:
+- **Formatted Date** - Timestamp data
+- **Summary** - Weather condition descriptions
+- **Precip Type** - Precipitation type (rain, snow, etc.)
+- **Temperature (C)** - Temperature in Celsius
+- **Apparent Temperature (C)** - Feels-like temperature
+- **Humidity** - Relative humidity percentage
+- **Wind Speed (km/h)** - Wind velocity
+- **Wind Bearing (degrees)** - Wind direction
+- **Visibility (km)** - Visibility distance
+- **Pressure (millibars)** - Atmospheric pressure
+- **Cloud Cover** - Cloud coverage percentage
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### ML Models
+- **Custom Ensemble Regressor** - For continuous weather parameters
+- **Custom Ensemble Classifier** - For categorical weather conditions
+- **Decision Stump Models** - Base learners for ensemble methods
+- **Seasonal Adjustments** - Time-series forecasting capabilities
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- Python 3.8+ (for ML model generation)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd eco-horizon-forecast
+   ```
+
+2. **Install frontend dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Install Python dependencies (for ML)**
+   ```bash
+   pip install pandas numpy
+   ```
+
+4. **Generate forecast data**
+   ```bash
+   python scripts/generate_forecast.py
+   ```
+
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+## 📁 Project Structure
+
+```
+eco-horizon-forecast/
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── pages/              # Application pages
+│   │   ├── Index.tsx       # Home page
+│   │   ├── Forecast.tsx    # Weather forecast page
+│   │   ├── WeatherMap.tsx  # Interactive map page
+│   │   └── NotFound.tsx    # 404 page
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utility functions
+│   └── App.tsx             # Main application component
+├── public/
+│   ├── Bangalore_Weather_Dataset.csv  # Historical weather data
+│   ├── bangalore_forecast.json        # Generated forecasts
+│   └── india-states.geojson           # Map data
+├── scripts/
+│   └── generate_forecast.py           # ML model script
+└── package.json
 ```
 
-**Edit a file directly in GitHub**
+## 🎯 Available Scripts
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-**Use GitHub Codespaces**
+## 🌟 Key Features
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Interactive Weather Map
+- Visualize weather patterns across India
+- Interactive state-level data
+- Real-time weather information display
 
-## What technologies are used for this project?
+### Advanced Forecasting
+- Machine learning-powered predictions
+- Multiple weather parameters
+- Seasonal trend analysis
 
-This project is built with:
+### Modern UI/UX
+- Responsive design for all devices
+- Dark/light theme support
+- Accessible components
+- Smooth animations and transitions
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🤝 Contributing
 
-## How can I deploy this project?
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Simply open [Lovable](https://lovable.dev/projects/a7042810-fccc-49fe-8482-c3837269f9bd) and click on Share -> Publish.
+## 📝 License
 
-## Can I connect a custom domain to my Lovable project?
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Yes, you can!
+## 🙏 Acknowledgments
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Weather data sourced from historical Bangalore weather records
+- UI components built with shadcn/ui
+- Map visualization powered by React Simple Maps
+- Charts and graphs created with Recharts
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+**Built with ❤️ using React, TypeScript, and Python**
